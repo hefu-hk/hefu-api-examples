@@ -22,9 +22,9 @@ Add HeFu as a custom OpenAI-compatible provider in LobeChat and route the whole 
 4. Save the provider.
 5. In the provider's model list, add each model ID exactly as documented in the [HeFu catalog](https://www.hefu.hk/models), for example:
    - General / agentic: `gpt-5.5`, `claude-opus-5`, `kimi-k3`
-   - Long-context Chinese text: `kimi-k2.6`, `deepseek-v4-pro`
+   - Long-context Chinese text: `kimi-k3`, `deepseek-v4-pro`
    - Multimodal: `qwen3.7-max`, `glm-5.1`
-   - Budget: `deepseek-v4-flash`, `minimax-m2.5`
+   - Budget: `deepseek-v4-flash`, `MiniMax-M2.5`
 6. Enable capability toggles per provider: **function calling** for tool-using models, **vision** only for multimodal models. Enabling vision on a non-vision model can cause silent failures — toggle conservatively.
 7. Start a new conversation, pick a HeFu model, and send a test message.
 

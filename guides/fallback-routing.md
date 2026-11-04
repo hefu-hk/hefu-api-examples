@@ -7,7 +7,7 @@ Runnable implementation: [examples/fallback.py](../examples/fallback.py)
 ## The chain
 
 ```text
-deepseek-v4-flash  →  qwen3.6-plus  →  kimi-k2.6
+deepseek-v4-flash  →  qwen3.6-plus  →  kimi-k3
      (fast/cheap)      (balanced)      (strong last resort)
 ```
 

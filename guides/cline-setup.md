@@ -20,7 +20,7 @@ Point Cline at HeFu's OpenAI-compatible endpoint to run any model in the [HeFu c
    - **API Key:** your HeFu key. For shared or version-controlled workspaces, use `$HEFU_API_KEY` environment-variable syntax so the key never lands in a committed file.
    - **Model ID:** an exact ID from the [model catalog](https://www.hefu.hk/models). Note the Model ID field may sit inside a collapsible **Model Configuration** block — do not skip it. Good starting points:
      - Coding / agentic loops: `deepseek-v4-pro`, `claude-opus-5`, `gpt-5.5`
-     - Budget loops: `deepseek-v4-flash`, `kimi-k2.6`
+     - Budget loops: `deepseek-v4-flash`, `kimi-k3`
 5. Click **Verify** (if shown in your version), then send a test prompt like `Reply with OK`.
 
 ## Troubleshooting

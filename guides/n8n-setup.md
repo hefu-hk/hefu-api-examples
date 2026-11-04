@@ -19,7 +19,7 @@ Best for AI Agent / chain workflows that expect an OpenAI Chat Model.
    - **Base URL:** `https://api.hefu.hk/v1` — this field overrides the default `https://api.openai.com/v1`. If the field is hidden in your version, look for it under the credential's advanced/advanced-options section.
 3. Save the credential.
 4. In your workflow, add an **AI Agent** node (or any node with a *Chat Model* input) and attach an **OpenAI Chat Model** sub-node using the credential above.
-5. In the model dropdown/field, enter an exact ID from the [HeFu catalog](https://www.hefu.hk/models), e.g. `deepseek-v4-pro`, `kimi-k2.6`, or `gpt-5.5`. If the dropdown doesn't fetch HeFu's list, type the ID manually (the expression/manual entry option).
+5. In the model dropdown/field, enter an exact ID from the [HeFu catalog](https://www.hefu.hk/models), e.g. `deepseek-v4-pro`, `kimi-k3`, or `gpt-5.5`. If the dropdown doesn't fetch HeFu's list, type the ID manually (the expression/manual entry option).
 6. Run the node with a test prompt.
 
 ## Option B: HTTP Request node
@@ -50,7 +50,7 @@ Best when you need raw control over the payload (streaming flags, extra headers,
 
 ## Notes
 
-- n8n's built-in **Error Trigger / retry-on-fail** settings handle transient failures; for model-level fallback (e.g. `deepseek-v4-flash` → `qwen3.6-plus` → `kimi-k2.6`), chain nodes with an `IF` on the previous node's error output, or use the application-side pattern in [Fallback routing](fallback-routing.md).
+- n8n's built-in **Error Trigger / retry-on-fail** settings handle transient failures; for model-level fallback (e.g. `deepseek-v4-flash` → `qwen3.6-plus` → `kimi-k3`), chain nodes with an `IF` on the previous node's error output, or use the application-side pattern in [Fallback routing](fallback-routing.md).
 - Keep keys in n8n credentials or environment variables, never inline in shared workflow JSON exports.
 
 See also: [Dify setup](dify-setup.md) · [Fallback routing](fallback-routing.md)

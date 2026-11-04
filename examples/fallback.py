@@ -1,6 +1,6 @@
 """Application-layer fallback chain over HeFu's OpenAI-compatible endpoint.
 
-Tries models in order — deepseek-v4-flash -> qwen3.6-plus -> kimi-k2.6 —
+Tries models in order — deepseek-v4-flash -> qwen3.6-plus -> kimi-k3 —
 retrying transient failures (429 / 5xx / network) with backoff before
 switching to the next model. Client errors (4xx other than 429) fail fast:
 every model would reject an invalid request identically.
@@ -19,7 +19,7 @@ from openai import APIError, APIStatusError, APITimeoutError, OpenAI
 
 # Ordered fallback chain: cheapest/fastest first, strongest last.
 # Swap in any IDs from https://www.hefu.hk/models to fit your priorities.
-FALLBACK_CHAIN = ["deepseek-v4-flash", "qwen3.6-plus", "kimi-k2.6"]
+FALLBACK_CHAIN = ["deepseek-v4-flash", "qwen3.6-plus", "kimi-k3"]
 
 MAX_RETRIES_PER_MODEL = 2   # attempts per model before falling back
 BACKOFF_BASE_SECONDS = 0.5  # exponential backoff: 0.5s, 1s, ... (+ jitter)

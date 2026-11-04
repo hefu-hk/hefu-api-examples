@@ -22,15 +22,15 @@ Dify's **OpenAI-API-compatible** model provider lets you register any endpoint t
    - **Function calling:** enable only for models with native tool support (e.g. `deepseek-v4-pro`, `gpt-5.5`, `claude-opus-5`); set to `Not support` otherwise
    - **Vision support:** enable only for multimodal models (e.g. `qwen3.7-max`, `glm-5.1`)
 4. Save. Repeat **Add model** for each HeFu model you want — suggested starter set:
-   - General chat: `deepseek-v4-pro`, `kimi-k2.6`, `gpt-5.5`
+   - General chat: `deepseek-v4-pro`, `kimi-k3`, `gpt-5.5`
    - Agent / tool use: `claude-opus-5`, `kimi-k3`
-   - Budget: `deepseek-v4-flash`, `qwen3.6-plus`, `minimax-m2.5`
+   - Budget: `deepseek-v4-flash`, `qwen3.6-plus`, `MiniMax-M2.5`
 5. Open an app (or create one), open the **model selector** in the orchestrate/prompt panel, and pick one of the HeFu models. Send a test message in the debug panel.
 
 ## Troubleshooting
 
 - **Credential validation fails** — check the endpoint URL ends with `/v1` and the key has no stray whitespace.
-- **Model not found** — the Model Name must match the catalog ID verbatim, including dots (`kimi-k2.6`, not `kimi-k26`).
+- **Model not found** — the Model Name must match the catalog ID verbatim, including dots (`kimi-k3`, not `kimi-k26`).
 - **Tool calls silently dropped** — the model was saved with function calling enabled but doesn't support it natively; edit the model entry and disable the toggle.
 
 ## Notes
