@@ -18,8 +18,8 @@ This directory contains a minimal HeFu OAuth 2.0 public-client example:
 ```bash
 export HEFU_CLIENT_ID="your-public-client-id"
 export HEFU_REDIRECT_URI="http://localhost:8000/callback"
-# Optional, but keep scopes minimal:
-export HEFU_OAUTH_SCOPE="ext_api ext_models:read"
+# Optional, only when the app has been approved for model-list access:
+# export HEFU_OAUTH_SCOPE="ext_api ext_models:read"
 # Optional current model ID for the final chat request:
 export HEFU_MODEL="kimi-k3"
 ```

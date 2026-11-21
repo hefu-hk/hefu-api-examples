@@ -22,14 +22,14 @@ from pathlib import Path
 
 import requests
 
-AUTHORIZE_URL = "https://hefu.hk/api/v1/oauth/authorize"
+AUTHORIZE_URL = "https://hefu.hk/oauth/authorize"
 TOKEN_URL = "https://hefu.hk/api/v1/oauth/token"
 API_BASE = "https://api.hefu.hk/v1"
 SESSION_PATH = Path(".hefu-oauth-session.json")
 
 CLIENT_ID = os.environ.get("HEFU_CLIENT_ID")
 REDIRECT_URI = os.environ.get("HEFU_REDIRECT_URI", "http://localhost:8000/callback")
-SCOPE = os.environ.get("HEFU_OAUTH_SCOPE", "ext_api ext_models:read")
+SCOPE = os.environ.get("HEFU_OAUTH_SCOPE", "ext_api")
 MODEL = os.environ.get("HEFU_MODEL", "kimi-k3")
 
 
@@ -60,6 +60,7 @@ def authorize_url() -> tuple[str, str, str]:
 def save_session(verifier: str, state: str) -> None:
     payload = json.dumps({"verifier": verifier, "state": state})
     fd = os.open(SESSION_PATH, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    os.fchmod(fd, 0o600)
     with os.fdopen(fd, "w") as handle:
         handle.write(payload)
 
