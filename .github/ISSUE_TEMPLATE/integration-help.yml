@@ -1,0 +1,26 @@
+name: Integration help
+description: Ask for help with an API, OAuth, client, AI Tools or DramaStudio workflow
+title: "[Integration]: "
+labels: ["integration"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include API keys, access tokens, wallet details, private callback data, or confidential customer material. Issues are public.
+  - type: textarea
+    attributes:
+      label: What are you trying to build?
+      description: Describe the user problem and the HeFu product or guide you are using.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected and actual behavior
+      description: Include relevant public error codes and a minimal reproduction where possible.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Relevant public example or documentation URL
+    validations:
+      required: false

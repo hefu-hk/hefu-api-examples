@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Enterprise integration and business collaboration
+    url: https://hefu.hk/enterprise?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=issue-contact
+    about: For solution evaluation, commercial integration, partnerships, or confidential requirements, use the HeFu enterprise contact page instead of posting private details in a public issue.

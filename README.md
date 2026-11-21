@@ -29,7 +29,7 @@ The API is OpenAI-compatible. Use one base URL and one API key for the currently
 
 ### 1. Get access
 
-[Sign up for HeFu](https://hefu.hk/login?mode=register), create an API key in the console, and choose a currently available model from the [live catalog](https://hefu.hk/models). Check the current platform rate and billing unit on its model detail page.
+[Sign up for HeFu](https://hefu.hk/login?mode=register&ref=Q8E2RWHR&utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-signup), create an API key in the console, and choose a currently available model from the [live catalog](https://hefu.hk/models). Check the current platform rate and billing unit on its model detail page.
 
 ### 2. Configure the key
 
@@ -93,6 +93,11 @@ See the [OpenAPI specification](https://hefu.hk/openapi.yaml) for model-specific
 - Retry 429/5xx and network failures with bounded exponential backoff and jitter.
 - Treat fallback models as different models: evaluate output quality instead of assuming interchangeable behavior.
 - Reconcile actual charges against HeFu call records, wallet details, and applicable discounts.
+
+## Get help or discuss an integration
+
+- For a reproducible technical question, open an [integration issue](https://github.com/hefu-hk/hefu-api-examples/issues/new?template=integration-help.yml). Never post keys, tokens, wallet details, or confidential customer data.
+- For solution evaluation, commercial integration, or partnership inquiries, use the [HeFu enterprise contact page](https://hefu.hk/enterprise?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-business).
 
 ## Resources
 
