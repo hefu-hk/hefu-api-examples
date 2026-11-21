@@ -27,7 +27,7 @@ const client = new OpenAI({
 // A spread of flagship models available through the same endpoint and key.
 // Model IDs change over time — see https://www.hefu.hk/models for the live
 // catalog (as of 2026-11).
-const MODELS = ['kimi-k3', 'claude-opus-4.5', 'gpt-6.1-terra'];
+const MODELS = ['kimi-k3', 'claude-fable-5-2', 'gpt-6.1-terra'];
 
 for (const model of MODELS) {
   const response = await client.chat.completions.create({

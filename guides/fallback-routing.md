@@ -7,11 +7,11 @@ Runnable implementation: [examples/fallback.py](../examples/fallback.py)
 ## The chain
 
 ```text
-deepseek-v4-flash  →  qwen3.6-plus  →  kimi-k3
-     (fast/cheap)      (balanced)      (strong last resort)
+deepseek-v4-flash  →  gemini-4-carbon  →  kimi-k3
+     (first choice)     (alternate)       (final choice)
 ```
 
-Order by your priorities: cheapest-first minimizes spend; strongest-first maximizes first-try quality. Any [catalog](https://www.hefu.hk/models) IDs work — the chain below is an example, not a requirement.
+Order the chain by your own measured quality, latency, and cost priorities. Choose chat-compatible IDs from the [live catalog](https://www.hefu.hk/models); the chain above is an example, not a requirement.
 
 ## When to fall back vs. when to retry
 

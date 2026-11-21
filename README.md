@@ -1,93 +1,108 @@
 # HeFu API Examples
 
-<!-- Badges: update the repo URLs after publishing -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Models](https://img.shields.io/badge/models-catalog-blue)](https://www.hefu.hk/models)
-[![Docs](https://img.shields.io/badge/docs-hefu.hk-green)](https://www.hefu.hk/docs)
-<!-- TODO: add CI / release badges once the repository is public -->
+[![Models](https://img.shields.io/badge/models-live_catalog-blue)](https://hefu.hk/models)
+[![Docs](https://img.shields.io/badge/docs-hefu.hk-green)](https://hefu.hk/docs)
 
-**HeFu is an enterprise AI application platform: a full-modality model workbench, scenario-based office tools and third-party app integration, all behind one OpenAI-compatible API.** One base URL and one API key give you access to frontier models from OpenAI, Anthropic, Google, DeepSeek, Moonshot (Kimi), Alibaba (Qwen), Zhipu (GLM), MiniMax and more — text, image, video and voice.
+Runnable examples and setup guides for [HeFu](https://hefu.hk): a unified model API, an AI Tools Workspace, third-party app integration, and the DramaStudio short-drama workflow.
 
-- **Base URL:** `https://api.hefu.hk/v1`
-- **Auth:** `Authorization: Bearer <your API key>` (user key) or an OAuth 2.0 user token (app integration)
-- **API surface:** OpenAI-compatible (`/v1/chat/completions`, `/v1/models`, …) plus images, video jobs, speech and embeddings — see the [OpenAPI contract](https://hefu.hk/openapi.yaml)
-- **No code?** The [model workbench](https://www.hefu.hk/models) covers full-modality online debugging, scenario presets and a private results center in the browser.
+The API is OpenAI-compatible. Use one base URL and one API key for the currently listed text, image, video, voice, embedding, and search models. AI Tools and DramaStudio also provide no-code workflows for users who do not need direct API control.
 
-## Repository layout
+- **API base URL:** `https://api.hefu.hk/v1`
+- **Authentication:** `Authorization: Bearer <your API key>` for your own account, or an OAuth user token for app integration
+- **Contract:** [OpenAPI specification](https://hefu.hk/openapi.yaml) and [developer documentation](https://hefu.hk/docs)
+- **Live availability:** [model catalog](https://hefu.hk/models) and [current platform rates](https://hefu.hk/pricing)
 
-Two layers, one repo:
+## Choose your path
 
-- **[quickstart/](quickstart/) — calling the API** with your own key: chat, multimodal (image / audio / video), and raw HTTP.
-- **[app-integration/](app-integration/) — building on top of HeFu**: OAuth + PKCE integration where your users pay for their own usage and your app holds no keys.
-- **[guides/](guides/) — connecting tools** (Cline, LobeChat, Open WebUI, Dify, n8n) and the model workbench walkthrough.
-- **[examples/](examples/) — production patterns** such as the fallback chain.
+| Product or task | Start here |
+|---|---|
+| Call models with Python, Node.js or curl | [quickstart/](quickstart/) |
+| Test models without writing code | [Model workbench guide](guides/workbench.md) |
+| Add AI to a third-party application with OAuth + PKCE | [app-integration/](app-integration/) |
+| Produce task-oriented content without code | [AI Tools Workspace guide](guides/ai-tools.md) |
+| Create and review a short-drama project | [DramaStudio guide](guides/dramastudio.md) |
+| Connect Cline, LobeChat, Open WebUI, Dify or n8n | [guides/](guides/) |
+| Add bounded retries and model fallback | [Fallback pattern](guides/fallback-routing.md) |
 
 ## Quick start
 
-### 1. Get an API key
+### 1. Get access
 
-[Sign up for HeFu](https://hefu.hk/login?mode=register&ref=Q8E2RWHR), then create an API key in the [console](https://www.hefu.hk). Browse the [model catalog](https://www.hefu.hk/models) and [pricing](https://www.hefu.hk/pricing) to pick your models.
+[Sign up for HeFu](https://hefu.hk/login?mode=register), create an API key in the console, and choose a currently available model from the [live catalog](https://hefu.hk/models). Check the current platform rate and billing unit on its model detail page.
 
-### 2. Set the environment variable
-
-All examples read the key from `HEFU_API_KEY`:
+### 2. Configure the key
 
 ```bash
 export HEFU_API_KEY="sk-hefu-..."
 ```
 
-### 3. Run an example
+Never commit the key. This repository's `.gitignore` excludes `.env` files, local OAuth session data, and generated output.
+
+### 3. Run a text example
 
 ```bash
-# Python (pip install openai)
+# Python: pip install openai
 python quickstart/python_openai_sdk.py
 
-# Node.js (npm install openai)
+# Node.js: npm install openai
 node quickstart/node_openai_sdk.mjs
 
-# curl (no dependencies)
+# Raw HTTP, no SDK dependency
 bash quickstart/curl.sh
-
-# Multimodal: image + speech + async video (pip install openai requests)
-python quickstart/multimodal.py
 ```
 
-### Models used in these examples
+The chat quickstarts use `kimi-k3`, `claude-fable-5-2`, and `gpt-6.1-terra`, verified against the live catalog on 2026-11-21. Replace them when the catalog changes, or set `HEFU_MODEL` where supported.
 
-`kimi-k3`, `claude-opus-4.5`, `gpt-6.1-terra` (chat quickstarts); image/audio/video IDs are resolved at runtime from `GET /v1/models` because the catalog changes constantly — check the [model catalog](https://www.hefu.hk/models) for the live list (as of 2026-11).
+### 4. Run a selected multimodal example
+
+```bash
+# pip install openai requests
+python quickstart/multimodal.py --image
+python quickstart/multimodal.py --audio
+python quickstart/multimodal.py --video
+```
+
+Each option performs a real billable request; the script does not run all modalities by default. Image and audio examples try known ID prefixes, while video requires an explicit current model ID:
+
+```bash
+export HEFU_VIDEO_MODEL="<current video model ID>"
+# Optional overrides: HEFU_IMAGE_MODEL, HEFU_AUDIO_MODEL, HEFU_AUDIO_VOICE
+```
+
+See the [OpenAPI specification](https://hefu.hk/openapi.yaml) for model-specific parameters and video task status fields.
 
 ## Repository index
 
-| Path | Description |
+| Path | What it demonstrates |
 |---|---|
-| [quickstart/python_openai_sdk.py](quickstart/python_openai_sdk.py) | Official Python `openai` SDK with a custom `base_url`; calls three models |
-| [quickstart/node_openai_sdk.mjs](quickstart/node_openai_sdk.mjs) | Official Node `openai` SDK with a custom `baseURL`; calls three models |
-| [quickstart/curl.sh](quickstart/curl.sh) | Raw HTTP calls: model list + chat completion |
-| [quickstart/multimodal.py](quickstart/multimodal.py) | Image generation, text-to-speech and async video generation through one key |
-| [app-integration/oauth_pkce.py](app-integration/oauth_pkce.py) | Zero-cost third-party integration: OAuth + PKCE without a client secret |
-| [guides/cline-setup.md](guides/cline-setup.md) | Use HeFu as Cline's OpenAI-compatible provider in VS Code |
-| [guides/lobechat-setup.md](guides/lobechat-setup.md) | Add HeFu as a custom provider in LobeChat |
-| [guides/open-webui-setup.md](guides/open-webui-setup.md) | Point Open WebUI at the HeFu endpoint (UI or env vars) |
-| [guides/dify-setup.md](guides/dify-setup.md) | Configure HeFu as an OpenAI-API-compatible model provider in Dify |
-| [guides/n8n-setup.md](guides/n8n-setup.md) | Use HeFu from n8n's OpenAI node and HTTP Request node |
-| [guides/workbench.md](guides/workbench.md) | Model workbench walkthrough: debugging, presets, results center, sub-accounts |
-| [guides/fallback-routing.md](guides/fallback-routing.md) | Application-layer fallback chain design (429/5xx handling) |
-| [examples/fallback.py](examples/fallback.py) | Runnable fallback chain across several models |
+| [quickstart/python_openai_sdk.py](quickstart/python_openai_sdk.py) | Official OpenAI Python SDK with a custom `base_url` |
+| [quickstart/node_openai_sdk.mjs](quickstart/node_openai_sdk.mjs) | Official OpenAI Node SDK with a custom `baseURL` |
+| [quickstart/curl.sh](quickstart/curl.sh) | Model listing and chat completion over raw HTTP |
+| [quickstart/multimodal.py](quickstart/multimodal.py) | Explicitly selected image, speech, and asynchronous video calls |
+| [app-integration/oauth_pkce.py](app-integration/oauth_pkce.py) | OAuth authorization code flow with S256 PKCE and state validation |
+| [examples/fallback.py](examples/fallback.py) | Bounded retries and fallback across current catalog models |
+| [guides/workbench.md](guides/workbench.md) | Model catalog, online workbench, results, and team access |
+| [guides/ai-tools.md](guides/ai-tools.md) | No-code AI Tools Workspace workflow |
+| [guides/dramastudio.md](guides/dramastudio.md) | Managed short-drama production and review workflow |
+| [guides/fallback-routing.md](guides/fallback-routing.md) | When to retry, fall back, or fail fast |
 
 ## Client guidance
 
-- Set client timeouts **≥120 seconds** (streaming is unaffected — time-to-first-byte is fast).
-- On 429/5xx, retry with exponential backoff; the gateway fails over across upstream channels automatically.
+- Use a client timeout appropriate to the workload; the current developer guidance recommends at least 120 seconds for long-running calls.
+- Retry 429/5xx and network failures with bounded exponential backoff and jitter.
+- Treat fallback models as different models: evaluate output quality instead of assuming interchangeable behavior.
+- Reconcile actual charges against HeFu call records, wallet details, and applicable discounts.
 
 ## Resources
 
-- [HeFu console](https://www.hefu.hk) — sign up, API keys, usage
-- [Developer platform](https://www.hefu.hk/docs) — quickstart, live debugging, OAuth integration
-- [Model catalog](https://www.hefu.hk/models)
-- [API documentation](https://www.hefu.hk/docs)
-- [Pricing](https://www.hefu.hk/pricing)
-- [Status](https://www.hefu.hk/status)
-- [HeFu engineering blog (EN)](https://blog.hefu.hk/en/blog/) — in-depth tutorials and comparisons
+- [HeFu console](https://hefu.hk) — accounts, keys, usage, and wallet
+- [Developer documentation](https://hefu.hk/docs)
+- [Live model catalog](https://hefu.hk/models)
+- [AI Tools Workspace](https://hefu.hk/tools)
+- [DramaStudio](https://drama.hefu.hk/)
+- [HeFu engineering blog](https://blog.hefu.hk/en/blog/)
+- [Service status](https://hefu.hk/status)
 
 ## License
 

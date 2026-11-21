@@ -1,0 +1,6 @@
+.env
+.env.*
+__pycache__/
+*.py[cod]
+.hefu-oauth-session.json
+hefu-intro.mp3

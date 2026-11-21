@@ -21,7 +21,7 @@ Add HeFu as a custom OpenAI-compatible provider in LobeChat and route the whole 
    - **HTTP proxy (optional):** only if your network needs a proxy to reach `api.hefu.hk`.
 4. Save the provider.
 5. In the provider's model list, add each model ID exactly as documented in the [HeFu catalog](https://www.hefu.hk/models), for example:
-   - General / agentic: `gpt-5.5`, `claude-opus-5`, `kimi-k3`
+   - General / agentic: `gpt-6.1-terra`, `claude-fable-5-2`, `kimi-k3`
    - Long-context Chinese text: `kimi-k3`, `deepseek-v4-pro`
    - Multimodal: `qwen3.7-max`, `glm-5.1`
    - Budget: `deepseek-v4-flash`, `MiniMax-M2.5`

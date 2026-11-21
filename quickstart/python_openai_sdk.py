@@ -28,7 +28,7 @@ client = OpenAI(
 # catalog (as of 2026-11).
 MODELS = [
     "kimi-k3",
-    "claude-opus-4.5",
+    "claude-fable-5-2",
     "gpt-6.1-terra",
 ]
 
