@@ -1,60 +1,83 @@
 # HeFu API Examples
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Models](https://img.shields.io/badge/models-live_catalog-blue)](https://hefu.hk/models)
-[![Docs](https://img.shields.io/badge/docs-hefu.hk-green)](https://hefu.hk/docs)
+[![Models](https://img.shields.io/badge/models-live_catalog-blue)](https://hefu.hk/models?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=badge-models)
+[![Docs](https://img.shields.io/badge/docs-hefu.hk-green)](https://hefu.hk/docs?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=badge-docs)
 
-Runnable examples and setup guides for [HeFu](https://hefu.hk): a unified model API, an AI Tools Workspace, third-party app integration, and the DramaStudio short-drama workflow.
-
-The API is OpenAI-compatible. Use one base URL and one API key for the currently listed text, image, video, voice, embedding, and search models. AI Tools and DramaStudio also provide no-code workflows for users who do not need direct API control.
+**Run your first multi-model API call in about 5 minutes.** Use HeFu's OpenAI-compatible API with runnable Python, Node.js and curl examples, then follow the matching integration guide when you are ready for production.
 
 - **API base URL:** `https://api.hefu.hk/v1`
 - **Authentication:** `Authorization: Bearer <your API key>` for your own account, or an OAuth user token for app integration
-- **Contract:** [OpenAPI specification](https://hefu.hk/openapi.yaml) and [developer documentation](https://hefu.hk/docs)
-- **Live availability:** [model catalog](https://hefu.hk/models) and [current platform rates](https://hefu.hk/pricing)
+- **Current model IDs:** [live model catalog](https://hefu.hk/models?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-models)
+- **Contract:** [developer documentation](https://hefu.hk/docs?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-docs) and [OpenAPI specification](https://hefu.hk/openapi.yaml?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-openapi)
 
-## Choose your path
-
-| Product or task | Start here |
-|---|---|
-| Call models with Python, Node.js or curl | [quickstart/](quickstart/) |
-| Test models without writing code | [Model workbench guide](guides/workbench.md) |
-| Add AI to a third-party application with OAuth + PKCE | [app-integration/](app-integration/) |
-| Produce task-oriented content without code | [AI Tools Workspace guide](guides/ai-tools.md) |
-| Create and review a short-drama project | [DramaStudio guide](guides/dramastudio.md) |
-| Connect Cline, LobeChat, Open WebUI, Dify or n8n | [guides/](guides/) |
-| Add bounded retries and model fallback | [Fallback pattern](guides/fallback-routing.md) |
+> **Billing notice:** the examples make real API requests and can incur charges. The Python and Node.js quickstarts make one chat request. Check the current model rate before running them, and never run multimodal or fallback loops as unattended tests.
 
 ## Quick start
 
-### 1. Get access
+### 1. Clone the repository
 
-[Sign up for HeFu](https://hefu.hk/login?mode=register&ref=Q8E2RWHR&utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-signup), create an API key in the console, and choose a currently available model from the [live catalog](https://hefu.hk/models). Check the current platform rate and billing unit on its model detail page.
+```bash
+git clone https://github.com/hefu-hk/hefu-api-examples.git
+cd hefu-api-examples
+```
 
-### 2. Configure the key
+### 2. Get access and choose a model
+
+[Sign up for HeFu](https://hefu.hk/login?mode=register&ref=Q8E2RWHR&utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-signup), create an API key in the console, and copy an exact model ID from the [live catalog](https://hefu.hk/models?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=quickstart-models). The catalog is authoritative when an example's default model is no longer available.
 
 ```bash
 export HEFU_API_KEY="sk-hefu-..."
+export HEFU_MODEL="kimi-k3"  # Replace with a current chat model ID when needed.
 ```
 
 Never commit the key. This repository's `.gitignore` excludes `.env` files, local OAuth session data, and generated output.
 
-### 3. Run a text example
+### 3. Run one Python request
 
 ```bash
-# Python: pip install openai
+pip install openai
 python quickstart/python_openai_sdk.py
+```
 
-# Node.js: npm install openai
+A successful run prints the selected model, the model's answer and token usage. This is an illustrative shape, not a recorded response:
+
+```text
+--- kimi-k3 ---
+An API gateway provides a single entry point for routing and managing API requests.
+(tokens: 61)
+```
+
+The exact answer and token count vary. Confirm actual usage and charges in the console rather than treating this illustration as a billing result.
+
+### 4. Or use Node.js or curl
+
+```bash
+# Node.js: one chat request; HEFU_MODEL is supported here too.
+npm install openai
 node quickstart/node_openai_sdk.mjs
 
-# Raw HTTP, no SDK dependency
+# Raw HTTP: list models, then make one chat request.
 bash quickstart/curl.sh
 ```
 
-The chat quickstarts use `kimi-k3`, `claude-fable-5-2`, and `gpt-6.1-terra`, verified against the live catalog on 2026-11-21. Replace them when the catalog changes, or set `HEFU_MODEL` where supported.
+The default IDs in the examples were checked against the live catalog on 2026-11-21. Replace them when the catalog changes. Python and Node.js accept `HEFU_MODEL`; for curl, edit the `model` field in `quickstart/curl.sh`.
 
-### 4. Run a selected multimodal example
+## Continue with a working integration
+
+GitHub contains the runnable implementation. The linked tutorials provide the searchable, step-by-step explanation and production checklist.
+
+| Task | Runnable example | Tutorial |
+|---|---|---|
+| Make an OpenAI-compatible request with Python | [Python quickstart](quickstart/python_openai_sdk.py) | [OpenAI-compatible API with Python](https://blog.hefu.hk/en/blog/openai-compatible-api-python-quickstart?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-python-tutorial) |
+| Add user-authorized AI access with OAuth + PKCE | [OAuth example](app-integration/) | [OAuth + PKCE desktop integration](https://blog.hefu.hk/en/blog/oauth-pkce-desktop-app-ai-integration?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-oauth-tutorial) |
+| Add bounded retries and model fallback | [Fallback example](examples/fallback.py) | [Fallback without infinite retries](https://blog.hefu.hk/en/blog/model-fallback-without-infinite-retries?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-fallback-tutorial) |
+| Connect Dify | [Dify guide](guides/dify-setup.md) | [Dify setup tutorial](https://blog.hefu.hk/en/blog/dify-openai-compatible-api-setup?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-dify-tutorial) |
+| Connect n8n | [n8n guide](guides/n8n-setup.md) | [n8n setup tutorial](https://blog.hefu.hk/en/blog/n8n-openai-compatible-api-setup?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-n8n-tutorial) |
+| Call image, audio or video models | [Multimodal example](quickstart/multimodal.py) | [OpenAPI specification](https://hefu.hk/openapi.yaml?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-multimodal-openapi) |
+| Connect Cline, LobeChat or Open WebUI | [Client guides](guides/) | [HeFu engineering blog](https://blog.hefu.hk/en/blog/?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-client-tutorials) |
+
+### Multimodal calls
 
 ```bash
 # pip install openai requests
@@ -70,22 +93,38 @@ export HEFU_VIDEO_MODEL="<current video model ID>"
 # Optional overrides: HEFU_IMAGE_MODEL, HEFU_AUDIO_MODEL, HEFU_AUDIO_VOICE
 ```
 
-See the [OpenAPI specification](https://hefu.hk/openapi.yaml) for model-specific parameters and video task status fields.
+## Other products
+
+These workflows are separate from the API quickstart. Use them when you need a managed product rather than direct API control.
+
+| Product or task | Start here |
+|---|---|
+| Test and compare models without writing code | [Model workbench guide](guides/workbench.md) |
+| Produce task-oriented content without code | [AI Tools Workspace guide](guides/ai-tools.md) |
+| Create and review a short-drama project | [DramaStudio guide](guides/dramastudio.md) |
 
 ## Repository index
 
 | Path | What it demonstrates |
 |---|---|
-| [quickstart/python_openai_sdk.py](quickstart/python_openai_sdk.py) | Official OpenAI Python SDK with a custom `base_url` |
-| [quickstart/node_openai_sdk.mjs](quickstart/node_openai_sdk.mjs) | Official OpenAI Node SDK with a custom `baseURL` |
+| [quickstart/python_openai_sdk.py](quickstart/python_openai_sdk.py) | Official OpenAI Python SDK with a custom `base_url` and one billable request |
+| [quickstart/node_openai_sdk.mjs](quickstart/node_openai_sdk.mjs) | Official OpenAI Node SDK with a custom `baseURL` and one billable request |
 | [quickstart/curl.sh](quickstart/curl.sh) | Model listing and chat completion over raw HTTP |
 | [quickstart/multimodal.py](quickstart/multimodal.py) | Explicitly selected image, speech, and asynchronous video calls |
 | [app-integration/oauth_pkce.py](app-integration/oauth_pkce.py) | OAuth authorization code flow with S256 PKCE and state validation |
 | [examples/fallback.py](examples/fallback.py) | Bounded retries and fallback across current catalog models |
-| [guides/workbench.md](guides/workbench.md) | Model catalog, online workbench, results, and team access |
-| [guides/ai-tools.md](guides/ai-tools.md) | No-code AI Tools Workspace workflow |
-| [guides/dramastudio.md](guides/dramastudio.md) | Managed short-drama production and review workflow |
 | [guides/fallback-routing.md](guides/fallback-routing.md) | When to retry, fall back, or fail fast |
+
+## Troubleshooting
+
+| Error or symptom | What to check |
+|---|---|
+| `HEFU_API_KEY is not set` | Export the key in the same shell before running the script. |
+| `401 Unauthorized` | Check the complete active key and the `Authorization: Bearer` header; never post the key in an issue. |
+| `404 Not Found` | Use base URL `https://api.hefu.hk/v1`; do not append `/chat/completions` when the SDK adds it automatically. |
+| Model not found or unavailable | Copy the exact current model ID from the live catalog and set `HEFU_MODEL` where supported. |
+| `429` or `5xx` | Use bounded exponential backoff with jitter; do not retry forever. See the [fallback guide](guides/fallback-routing.md). |
+| Unexpected usage | Stop the script and inspect console call records and wallet details. Every retry or fallback attempt can be billable. |
 
 ## Client guidance
 
@@ -101,13 +140,14 @@ See the [OpenAPI specification](https://hefu.hk/openapi.yaml) for model-specific
 
 ## Resources
 
-- [HeFu console](https://hefu.hk) — accounts, keys, usage, and wallet
-- [Developer documentation](https://hefu.hk/docs)
-- [Live model catalog](https://hefu.hk/models)
-- [AI Tools Workspace](https://hefu.hk/tools)
-- [DramaStudio](https://drama.hefu.hk/)
-- [HeFu engineering blog](https://blog.hefu.hk/en/blog/)
-- [Service status](https://hefu.hk/status)
+- [HeFu console](https://hefu.hk?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=readme-console) — accounts, keys, usage, and wallet
+- [Developer documentation](https://hefu.hk/docs?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=resources-docs)
+- [Live model catalog](https://hefu.hk/models?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=resources-models)
+- [Current platform rates](https://hefu.hk/pricing?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=resources-pricing)
+- [AI Tools Workspace](https://hefu.hk/tools?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=resources-ai-tools)
+- [DramaStudio](https://drama.hefu.hk/?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=resources-dramastudio)
+- [HeFu engineering blog](https://blog.hefu.hk/en/blog/?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=resources-blog)
+- [Service status](https://hefu.hk/status?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=resources-status)
 
 ## License
 

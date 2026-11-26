@@ -10,6 +10,8 @@ This directory contains a minimal HeFu OAuth 2.0 public-client example:
 |---|---|
 | [oauth_pkce.py](oauth_pkce.py) | Authorize URL, PKCE challenge, local session, state validation, token exchange, and a user-authorized chat request |
 
+Full tutorial: [How to Add OAuth AI Access to a Desktop App with PKCE](https://blog.hefu.hk/en/blog/oauth-pkce-desktop-app-ai-integration?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=guide-oauth-tutorial)
+
 ## Before you run
 
 1. Register a public application in the HeFu console as described in the [developer documentation](https://hefu.hk/docs).

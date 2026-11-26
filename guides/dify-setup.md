@@ -38,4 +38,6 @@ Dify's **OpenAI-API-compatible** model provider lets you register any endpoint t
 - The OpenAI-API-compatible provider stores credentials per model entry; rotating a key means editing each saved model (or re-adding them). Keep the key in your secrets manager, e.g. as `HEFU_API_KEY`.
 - For workflows that fan out across models, see [Fallback routing](fallback-routing.md) for an application-side pattern you can mirror in a Dify workflow's branching.
 
+Full tutorial: [Connect HeFu to Dify](https://blog.hefu.hk/en/blog/dify-openai-compatible-api-setup?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=guide-dify-tutorial)
+
 See also: [n8n setup](n8n-setup.md) · [Cline setup](cline-setup.md) · [Fallback routing](fallback-routing.md)

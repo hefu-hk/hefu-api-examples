@@ -44,6 +44,7 @@ An API gateway is a single entry point that routes, authenticates, ...
 
 ## Further reading
 
-- [HeFu docs](https://www.hefu.hk/docs) — error codes and rate-limit details
-- [HeFu pricing](https://www.hefu.hk/pricing) — pick chain order with real numbers
-- [AI API gateway for developers](https://blog.hefu.hk/en/blog/ai-api-gateway-for-developers) — background on the gateway pattern
+- [Model fallback without infinite retries](https://blog.hefu.hk/en/blog/model-fallback-without-infinite-retries?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=guide-fallback-tutorial) — full policy, verification and production checklist
+- [HeFu docs](https://www.hefu.hk/docs?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=guide-fallback-docs) — error codes and rate-limit details
+- [HeFu pricing](https://www.hefu.hk/pricing?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=guide-fallback-pricing) — pick chain order with real numbers
+- [AI API gateway for developers](https://blog.hefu.hk/en/blog/ai-api-gateway-for-developers?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=guide-fallback-background) — background on the gateway pattern

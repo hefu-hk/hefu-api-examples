@@ -53,4 +53,6 @@ Best when you need raw control over the payload (streaming flags, extra headers,
 - n8n's built-in **Error Trigger / retry-on-fail** settings handle transient failures; for model-level fallback (e.g. `deepseek-v4-flash` → `gemini-4-carbon` → `kimi-k3`), chain nodes with an `IF` on the previous node's error output, or use the application-side pattern in [Fallback routing](fallback-routing.md).
 - Keep keys in n8n credentials or environment variables, never inline in shared workflow JSON exports.
 
+Full tutorial: [Connect HeFu to n8n](https://blog.hefu.hk/en/blog/n8n-openai-compatible-api-setup?utm_source=github&utm_medium=referral&utm_campaign=hefu-api-examples&utm_content=guide-n8n-tutorial)
+
 See also: [Dify setup](dify-setup.md) · [Fallback routing](fallback-routing.md)
