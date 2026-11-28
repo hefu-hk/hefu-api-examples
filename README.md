@@ -28,7 +28,7 @@ cd hefu-api-examples
 
 ```bash
 export HEFU_API_KEY="sk-hefu-..."
-export HEFU_MODEL="kimi-k3"  # Replace with a current chat model ID when needed.
+export HEFU_MODEL="deepseek-v4-flash"  # Replace with a current chat model ID when needed.
 ```
 
 Never commit the key. This repository's `.gitignore` excludes `.env` files, local OAuth session data, and generated output.
@@ -43,7 +43,7 @@ python quickstart/python_openai_sdk.py
 A successful run prints the selected model, the model's answer and token usage. This is an illustrative shape, not a recorded response:
 
 ```text
---- kimi-k3 ---
+--- deepseek-v4-flash ---
 An API gateway provides a single entry point for routing and managing API requests.
 (tokens: 61)
 ```
@@ -61,7 +61,7 @@ node quickstart/node_openai_sdk.mjs
 bash quickstart/curl.sh
 ```
 
-The default IDs in the examples were checked against the live catalog on 2026-11-21. Replace them when the catalog changes. Python and Node.js accept `HEFU_MODEL`; for curl, edit the `model` field in `quickstart/curl.sh`.
+The default IDs in the examples were checked against the live catalog on 2026-11-28. Replace them when the catalog changes. Python, Node.js and curl all accept `HEFU_MODEL` as the current model override.
 
 ## Continue with a working integration
 

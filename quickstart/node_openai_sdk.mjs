@@ -19,7 +19,7 @@ if (!apiKey) {
 }
 
 // Replace the default when the live catalog changes.
-const model = process.env.HEFU_MODEL || 'kimi-k3';
+const model = process.env.HEFU_MODEL || 'deepseek-v4-flash';
 const client = new OpenAI({
   apiKey,
   baseURL: 'https://api.hefu.hk/v1',

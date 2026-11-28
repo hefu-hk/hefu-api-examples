@@ -18,7 +18,7 @@ if not api_key:
     raise SystemExit("HEFU_API_KEY is not set. Export it first, e.g.: export HEFU_API_KEY=sk-hefu-...")
 
 # Replace the default when the live catalog changes.
-model = os.environ.get("HEFU_MODEL", "kimi-k3")
+model = os.environ.get("HEFU_MODEL", "deepseek-v4-flash")
 client = OpenAI(
     api_key=api_key,
     base_url="https://api.hefu.hk/v1",

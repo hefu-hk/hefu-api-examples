@@ -23,14 +23,14 @@ from pathlib import Path
 import requests
 
 AUTHORIZE_URL = "https://hefu.hk/oauth/authorize"
-TOKEN_URL = "https://hefu.hk/api/v1/oauth/token"
-API_BASE = "https://api.hefu.hk/v1"
+TOKEN_URL = "https://api.hefu.hk/api/v1/oauth/token"
+CHAT_URL = "https://api.hefu.hk/api/v1/ext/chat/completions"
 SESSION_PATH = Path(".hefu-oauth-session.json")
 
 CLIENT_ID = os.environ.get("HEFU_CLIENT_ID")
 REDIRECT_URI = os.environ.get("HEFU_REDIRECT_URI", "http://localhost:8000/callback")
 SCOPE = os.environ.get("HEFU_OAUTH_SCOPE", "ext_api")
-MODEL = os.environ.get("HEFU_MODEL", "kimi-k3")
+MODEL = os.environ.get("HEFU_MODEL", "deepseek-v4-flash")
 
 
 def new_pkce_pair() -> tuple[str, str]:
@@ -81,7 +81,7 @@ def exchange_code(callback_url: str) -> dict:
 
     resp = requests.post(
         TOKEN_URL,
-        data={
+        json={
             "grant_type": "authorization_code",
             "client_id": CLIENT_ID,
             "code": code,
@@ -97,7 +97,7 @@ def exchange_code(callback_url: str) -> dict:
 
 def call_with_user_token(access_token: str) -> None:
     resp = requests.post(
-        f"{API_BASE}/chat/completions",
+        CHAT_URL,
         headers={"Authorization": f"Bearer {access_token}"},
         json={
             "model": MODEL,
